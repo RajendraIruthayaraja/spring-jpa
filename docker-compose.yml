@@ -8,9 +8,10 @@ services:
     image: mysql:5.7
     container_name: conference
     ports:
-    - 3306:3306
+    - 3307:3307
     volumes:
     - "./.data/db:/var/lib/mysql"
     environment:
-      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_USER: dockermysql
+      MYSQL_PASSWORD: pass
       MYSQL_DATABASE: conference

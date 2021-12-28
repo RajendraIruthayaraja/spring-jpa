@@ -1,5 +1,7 @@
 package com.pluralsight.conference.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -16,6 +18,12 @@ public class RegisterRepositoryImpl implements RegisterRepository {
 	@Override
 	public Registration save(Registration registration) {
 		entityManager.persist(registration);
+		return registration;
+	}
+
+	@Override
+	public List<Registration> findAll() {
+		List<Registration> registration = entityManager.createQuery("Select r from Registration r").getResultList();
 		return registration;
 	}
 }

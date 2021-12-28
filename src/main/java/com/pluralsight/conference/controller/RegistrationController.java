@@ -3,12 +3,15 @@ package com.pluralsight.conference.controller;
 import com.pluralsight.conference.model.Registration;
 import com.pluralsight.conference.service.RegistrationService;
 
+import antlr.collections.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 
@@ -21,6 +24,13 @@ public class RegistrationController {
     @GetMapping("registration")
     public String getRegistration(@ModelAttribute ("registration")Registration registration) {
         return "registration";
+    }
+    
+    @GetMapping("registrations")
+    public @ResponseBody java.util.List<Registration> getRegistrations() {
+        
+    	java.util.List<Registration> registrations = registrationService.findAll();   	
+    	return registrations;
     }
 
     @PostMapping("registration")

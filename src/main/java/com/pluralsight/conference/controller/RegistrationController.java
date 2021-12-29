@@ -1,6 +1,7 @@
 package com.pluralsight.conference.controller;
 
 import com.pluralsight.conference.model.Registration;
+import com.pluralsight.conference.model.RegistrationReport;
 import com.pluralsight.conference.service.RegistrationService;
 
 import antlr.collections.List;
@@ -31,6 +32,14 @@ public class RegistrationController {
         
     	java.util.List<Registration> registrations = registrationService.findAll();   	
     	return registrations;
+    }
+    
+    @GetMapping("registration-report")
+    public @ResponseBody java.util.List<RegistrationReport> getRegistrationReport(){
+    	
+    	java.util.List<RegistrationReport> registrationReport = registrationService.findAllReport();
+    	
+    	return registrationReport; 
     }
 
     @PostMapping("registration")

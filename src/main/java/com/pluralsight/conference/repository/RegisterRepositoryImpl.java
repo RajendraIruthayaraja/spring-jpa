@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import com.pluralsight.conference.model.Registration;
+import com.pluralsight.conference.model.RegistrationReport;
 
 @Repository
 public class RegisterRepositoryImpl implements RegisterRepository {
@@ -25,5 +26,17 @@ public class RegisterRepositoryImpl implements RegisterRepository {
 	public List<Registration> findAll() {
 		List<Registration> registration = entityManager.createQuery("Select r from Registration r").getResultList();
 		return registration;
+	}
+
+	@Override
+	public List<RegistrationReport> findAllReport() {
+		
+		String jpql = "Select new com.pluralsight.conference.model.RegistrationReport" +
+				"(r.name, c.name, c.description) " +
+				"from Registration r, Course c " +
+				"where r.id = c.registration.id";
+				
+		List<RegistrationReport> registrationReport = entityManager.createQuery(jpql).getResultList();
+		return registrationReport;
 	}
 }

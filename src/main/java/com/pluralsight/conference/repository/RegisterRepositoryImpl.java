@@ -31,12 +31,18 @@ public class RegisterRepositoryImpl implements RegisterRepository {
 	@Override
 	public List<RegistrationReport> findAllReport() {
 		
-		String jpql = "Select new com.pluralsight.conference.model.RegistrationReport" +
-				"(r.name, c.name, c.description) " +
-				"from Registration r, Course c " +
-				"where r.id = c.registration.id";
-				
-		List<RegistrationReport> registrationReport = entityManager.createQuery(jpql).getResultList();
+		//NAMED QUERIES WILL REPLACE THE BELOW COMMENTED CODE
+		/*
+		 * String jpql =
+		 * "Select new com.pluralsight.conference.model.RegistrationReport" +
+		 * "(r.name, c.name, c.description) " + "from Registration r, Course c " +
+		 * "where r.id = c.registration.id";
+		 * 
+		 * List<RegistrationReport> registrationReport =
+		 * entityManager.createQuery(jpql).getResultList();
+		 */
+		
+		List<RegistrationReport> registrationReport = entityManager.createNamedQuery(Registration.REGISTRATION_REPORT).getResultList();
 		return registrationReport;
 	}
 }

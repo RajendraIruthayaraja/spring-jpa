@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -16,21 +18,28 @@ import javax.validation.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name="REGISTRATION")
+@Table(name = "REGISTRATION")
+@NamedQueries({
+	@NamedQuery(name=Registration.REGISTRATION_REPORT,query = Registration.REGISTRATION_REPORT_JPQL)
+})
 public class Registration {
+
+	public static final String REGISTRATION_REPORT = "registrationReport";
+	public static final String REGISTRATION_REPORT_JPQL = "Select new com.pluralsight.conference.model.RegistrationReport"
+			+ "(r.name, c.name, c.description) " + "from Registration r, Course c " + "where r.id = c.registration.id";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-    @NotEmpty
-    private String name;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "registration",cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-    List<Course> courses = new ArrayList<>();    
-    
-    public List<Course> getCourses() {
+	@NotEmpty
+	private String name;
+
+	@JsonManagedReference
+	@OneToMany(mappedBy = "registration", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	List<Course> courses = new ArrayList<>();
+
+	public List<Course> getCourses() {
 		return courses;
 	}
 
@@ -39,18 +48,18 @@ public class Registration {
 	}
 
 	public Long getId() {
-    	return id;
-    }
-    
-    public void setId(Long id) {
-    	this.id=id;
-    }
-    
-    public String getName() {
-        return name;
-    }
+		return id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

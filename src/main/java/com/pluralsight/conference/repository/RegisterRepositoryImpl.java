@@ -10,7 +10,9 @@ import org.springframework.stereotype.Repository;
 import com.pluralsight.conference.model.Registration;
 import com.pluralsight.conference.model.RegistrationReport;
 
-@Repository
+//Commented this entire class,  because this implementation class has been replaced by extending the
+//JPARepository in the RegisterRepository.Java class
+/*@Repository
 public class RegisterRepositoryImpl implements RegisterRepository {
 
 	@PersistenceContext
@@ -32,7 +34,7 @@ public class RegisterRepositoryImpl implements RegisterRepository {
 	public List<RegistrationReport> findAllReport() {
 		
 		//NAMED QUERIES WILL REPLACE THE BELOW COMMENTED CODE
-		/*
+		
 		 * String jpql =
 		 * "Select new com.pluralsight.conference.model.RegistrationReport" +
 		 * "(r.name, c.name, c.description) " + "from Registration r, Course c " +
@@ -40,9 +42,9 @@ public class RegisterRepositoryImpl implements RegisterRepository {
 		 * 
 		 * List<RegistrationReport> registrationReport =
 		 * entityManager.createQuery(jpql).getResultList();
-		 */
+		 
 		
 		List<RegistrationReport> registrationReport = entityManager.createNamedQuery(Registration.REGISTRATION_REPORT).getResultList();
 		return registrationReport;
 	}
-}
+}*/

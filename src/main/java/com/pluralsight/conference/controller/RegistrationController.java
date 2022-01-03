@@ -18,31 +18,31 @@ import javax.validation.Valid;
 
 @Controller
 public class RegistrationController {
-	
+
 	@Autowired
 	private RegistrationService registrationService;
 
-    @GetMapping("registration")
-    public String getRegistration(@ModelAttribute ("registration")Registration registration) {
-        return "registration";
-    }
-    
-    @GetMapping("registrations")
-    public @ResponseBody java.util.List<Registration> getRegistrations() {
-        
-    	java.util.List<Registration> registrations = registrationService.findAll();   	
-    	return registrations;
-    }
-    
-    @GetMapping("registration-report")
-    public @ResponseBody java.util.List<RegistrationReport> getRegistrationReport(){
-    	
-    	java.util.List<RegistrationReport> registrationReport = registrationService.findAllReport();
-    	
-    	return registrationReport; 
-    }
+	@GetMapping("registration")
+	public String getRegistration(@ModelAttribute("registration") Registration registration) {
+		return "registration";
+	}
 
-    @PostMapping("registration")
+	@GetMapping("registrations")
+	public @ResponseBody java.util.List<Registration> getRegistrations() {
+
+		java.util.List<Registration> registrations = registrationService.findAll();
+		return registrations;
+	}
+
+	@GetMapping("registration-report")
+	public @ResponseBody java.util.List<RegistrationReport> getRegistrationReport() {
+
+		java.util.List<RegistrationReport> registrationReport = registrationService.findAllReport();
+
+		return registrationReport;
+	}
+
+	@PostMapping("registration")
     public String addRegistration(@Valid @ModelAttribute ("registration")
                                               Registration registration,
                                   BindingResult result) {
@@ -58,5 +58,13 @@ public class RegistrationController {
 
         return "redirect:registration";
     }
+
+	@PostMapping("registration/update")
+    public @ResponseBody Registration updtaeRegistration(@Valid @ModelAttribute("registration") 
+    				Registration registration, BindingResult result ) {
+		
+		return registrationService.addRegistration(registration);
+		
+	}
 
 }

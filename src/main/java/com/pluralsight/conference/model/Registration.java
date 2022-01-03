@@ -24,7 +24,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 })
 public class Registration {
 
-	public static final String REGISTRATION_REPORT = "registrationReport";
+	//This is for the named query and the jpql is formed based upon projection to display only the required object to the front end
+	public static final String REGISTRATION_REPORT = "Registration.registrationReport";
 	public static final String REGISTRATION_REPORT_JPQL = "Select new com.pluralsight.conference.model.RegistrationReport"
 			+ "(r.name, c.name, c.description) " + "from Registration r, Course c " + "where r.id = c.registration.id";
 

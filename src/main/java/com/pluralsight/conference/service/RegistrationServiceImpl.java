@@ -26,6 +26,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 	@Transactional
 	public Registration addRegistration(Registration registration) {
 		
+		if(registration.getId()==null) {
 		registration = registerRepository.save(registration);				
 		
 		Course course = new Course();
@@ -33,7 +34,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 		course.setDescription("Every Registered user must take this course");
 		course.setRegistration(registration);
 		courseRepository.save(course);
-		
+		}
 		return registration;
 	}
 
@@ -48,7 +49,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 	@Override
 	public List<RegistrationReport> findAllReport() {
 		
-		List<RegistrationReport> registrationReport = registerRepository.findAllReport();
+		List<RegistrationReport> registrationReport = registerRepository.registrationReport();
 		return registrationReport;
 	}
 	
